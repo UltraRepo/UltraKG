@@ -17,7 +17,7 @@ UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, 
 
 ## 🧱 Architecture
 
-\`\`\`plaintext
+``` plaintext
 +-------------+     +----------------+     +----------------------+
 | Flowise RAG | --> | PGVector (SQL) | --> | Apache Jena Fuseki   |
 |  (LangChain)|     | + PostgreSQL   |     |  SPARQL Server       |
@@ -27,7 +27,7 @@ UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, 
      | XLS to OWL2    |------+----->| OWL2 Individuals   |
      | mapping tool   |             | with GUID links    |
      +----------------+             +--------------------+
-\`\`\`
+```
 
 ---
 
@@ -35,24 +35,24 @@ UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, 
 
 ### 1. Clone the repo
 
-\`\`\`bash
+``` bash
 git clone https://github.com/UltraRepo/UltraKG.git
 cd UltraKG
-\`\`\`
+``` 
 
 ### 2. Set environment variables
 
-\`\`\`bash
+``` bash
 cp .env.example .env
-\`\`\`
+``` 
 
 Edit \`.env\` to match your local or cloud environment.
 
 ### 3. Launch stack with Docker
 
-\`\`\`bash
+``` bash
 docker-compose up --build
-\`\`\`
+``` 
 
 ---
 
@@ -60,11 +60,11 @@ docker-compose up --build
 
 | Folder | Purpose |
 |--------|---------|
-| \`jena-fuseki/\` | SPARQL server with OWL2/RDF support |
-| \`postgres/\` | PostgreSQL with PGVector extension |
-| \`flowise/\` | Visual LangChain UI for RAG pipelines |
-| \`tools/xls-to-owl/\` | XLS to OWL2 RDF mapping CLI utility |
-| \`reverse-proxy/\` | Nginx Proxy Manager for subdomain routing |
+| \jena-fuseki/ | SPARQL server with OWL2/RDF support |
+| \postgres/ | PostgreSQL with PGVector extension |
+| \flowise/ | Visual LangChain UI for RAG pipelines |
+| \tools/xls-to-owl/ | XLS to OWL2 RDF mapping CLI utility |
+| \reverse-proxy/ | Nginx Proxy Manager for subdomain routing |
 
 ---
 
@@ -74,7 +74,7 @@ docker-compose up --build
 2. Convert metadata (or XLS files) to OWL2 using the CLI tool
 3. Load OWL2 graph into Apache Jena Fuseki
 4. Query knowledge via SPARQL + vector search
-5. Route services via \`ai.ultrakg.com\`, \`sparql.ultrakg.com\`, etc.
+5. Route services via `ai.yourdomain.com\`, `sparql.yourdomain.com\`, etc.
 
 ---
 
