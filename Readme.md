@@ -10,7 +10,7 @@ UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, 
 - 🐘 **PostgreSQL + PGVector** for vector search and hybrid AI queries
 - 🔄 **LangChain (via Flowise)** for document ingestion + RAG agents
 - 📄 **XLS to OWL2 Conversion** using ProtegeProject’s `mapping-master`
-- 🌍 **Nginx Proxy Manager** for domain-based access (e.g., `ai.ultrakg.com`)
+- 🌍 **Nginx Proxy Manager** for domain-based access (e.g., `ai.yourdomain.com`)
 - ☁️ **Cloud-agnostic Docker deployment** (Azure, AWS, GCP, on-prem)
 
 ---
@@ -46,7 +46,7 @@ cd UltraKG
 cp .env.example .env
 ``` 
 
-Edit \`.env\` to match your local or cloud environment.
+Edit `.env` to match your local or cloud environment.
 
 ### 3. Launch stack with Docker
 
@@ -60,11 +60,11 @@ docker-compose up --build
 
 | Folder | Purpose |
 |--------|---------|
-| \jena-fuseki/ | SPARQL server with OWL2/RDF support |
-| \postgres/ | PostgreSQL with PGVector extension |
-| \flowise/ | Visual LangChain UI for RAG pipelines |
-| \tools/xls-to-owl/ | XLS to OWL2 RDF mapping CLI utility |
-| \reverse-proxy/ | Nginx Proxy Manager for subdomain routing |
+| \jena-fuseki | SPARQL server with OWL2/RDF support |
+| \postgres  | PostgreSQL with PGVector extension |
+| \flowise  | Visual LangChain UI for RAG pipelines |
+| \tools/xls-to-owl  | XLS to OWL2 RDF mapping CLI utility |
+| \reverse-proxy  | Nginx Proxy Manager for subdomain routing |
 
 ---
 
