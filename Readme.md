@@ -10,7 +10,7 @@ UltraKG enhances reasoning capabilities further with **Neurosymbolic Reasoning (
 
 This symbolic + vector hybrid architecture enables **semantic querying and intelligent retrieval** ideally suited for enterprise-grade use cases — such as regulatory intelligence, clinical research, knowledge management, and more — where accuracy, consistency, and traceability are paramount.
 
-UltraKG ships with **GraphRAG and OmniRAG** pipelines pre-integrated via [Flowise](https://github.com/FlowiseAI/Flowise), and is built on open standards including **OWL2**, **RDF**, **SPARQL**, **PostgreSQL**, and **PGVector**. It runs on **any cloud** or **on-prem infrastructure** using Docker.
+UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embedding is provided via [Flowise](https://github.com/FlowiseAI/Flowise), and is built on open standards including **OWL2**, **RDF**, **SPARQL**, **PostgreSQL**, and **PGVector**. It runs on **any cloud** or **on-prem infrastructure** using Docker.
 
 UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, and runs on **any cloud** or **on-prem infrastructure** using Docker.
 
