@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UltraKG Admin Dashboard</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 2rem;
+            background-color: #f9f9f9;
+        }
+        h1 {
+            margin-bottom: 2rem;
+        }
+        .feature {
+            margin-bottom: 1.5rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+        }
+        .feature button {
+            margin-right: 1rem;
+            padding: 0.5rem 1rem;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+        .feature img {
+            height: 20px;
+            margin-left: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <h1>UltraKG Admin Dashboard</h1>
+    <div class="feature">
+        <button onclick="window.open('http://localhost:3000', '_blank')">Launch</button>
+        <span>Flowise Editor</span>
+    </div>
+    <div class="feature">
+        <button onclick="alert('XLS upload functionality coming soon.')">Upload</button>
+        <span>Upload XLS File for Use as Knowledge Graph</span>
+    </div>
+    <div class="feature">
+        <button onclick="alert('Fetching available knowledge graphs...')">Download</button>
+        <span>Download Knowledge Graph (from Apache Jena)</span>
+    </div>
+    <div class="feature">
+        <button onclick="window.open('http://localhost:5432', '_blank')">Launch</button>
+        <span>PostgreSQL Studio</span>
+    </div>
+    <div class="feature">
+        <button onclick="window.open('http://localhost:81', '_blank')">Launch</button>
+        <span>Nginx Proxy Manager</span>
+    </div>
+    <div class="feature">
+        <button onclick="window.open('https://github.com/UltraRepo/UltraKG', '_blank')">View</button>
+        <span>View GitHub Project <img src="https://github.githubassets.com/images/modules/logos_page/GitHub-Mark.png" alt="GitHub"></span>
+    </div>
+</body>
+</html>

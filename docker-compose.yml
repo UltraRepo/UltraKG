@@ -1,0 +1,53 @@
+version: "3.8"
+
+services:
+  postgres:
+    image: ankane/pgvector
+    restart: always
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER=${POSTGRES_USER}
+      POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+      POSTGRES_DB=${POSTGRES_DB}
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  jena-fuseki:
+    build: ./backend/jena-fuseki
+    ports:
+      - "${FUSEKI_PORT}:3030"
+
+  flowise:
+    image: flowiseai/flowise
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - FLOWISE_USERNAME=${FLOWISE_USERNAME}
+      - FLOWISE_PASSWORD=${FLOWISE_PASSWORD}
+    volumes:
+      - ./backend/flowise:/root/.flowise
+
+  nginx-proxy-manager:
+    image: jc21/nginx-proxy-manager:latest
+    restart: always
+    ports:
+      - "80:80"
+      - "81:81"
+      - "443:443"
+    volumes:
+      - ./backend/reverse-proxy/data:/data
+      - ./backend/reverse-proxy/letsencrypt:/etc/letsencrypt
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    ports:
+      - "${FASTAPI_PORT}:8000"
+    volumes:
+      - ./frontend:/app
+
+volumes:
+  pgdata:
