@@ -7,10 +7,20 @@ services:
       - "5432:5432"
     environment:
       - POSTGRES_USER=postgres
-      - POSTGRES_PASSWORD=yourpassword
-      - POSTGRES_DB=ultrakg
+      - POSTGRES_PASSWORD=password123
+      - POSTGRES_DB=db
     volumes:
       - pgdata:/var/lib/postgresql/data
+
+  fastapi:
+    build:
+      context: .
+      dockerfile: Dockerfile.fastapi
+    ports:
+      - "8000:8000"
+    environment:
+      - FASTAPI_PORT=8000
+    restart: always
 
   jena-fuseki:
     image: stain/jena-fuseki

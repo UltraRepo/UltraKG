@@ -4,7 +4,7 @@ WORKDIR /app
 
 COPY frontend/app /app
 COPY frontend/public /app/frontend/public
-COPY frontend/app/requirements.txt .
+COPY requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt

@@ -156,7 +156,10 @@ This guide walks you through configuring NGINX Proxy Manager (NPM) to route and 
 | **Websockets Support** | ✅ Enabled |
 | **Block Common Exploits** | ✅ Enabled |
 
-6. Switch to the **SSL tab**:
+6.  Switch to **SSL CERTIFICATES** and issue a new SSL
+   Use the Let's Encrypt to issue a cert in NPM.
+
+7. Switch back to Proxy Hosts, go to the **SSL tab** for the Proxy e.g., `ai.ultrakg.com`.  Use the letsencrypt cert you just issued :
 
 | Setting | Action |
 |---------|--------|
@@ -242,6 +245,10 @@ After logging in to your custom domain (e.g. `ai.yourdomain.com`), you will see:
 - 🔐 **Access NGINX Manager**
 - 💬 **Chat with UltraKG (via Open WebUI)**
 - 🧬 **View GitHub Repo**
+
+UltraKG Admin Dashboard - via NPM Login:
+![FastAPI Dash](ultrakg-dash.png "FastAPI")
+
 
 ---
 
