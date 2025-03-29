@@ -47,3 +47,14 @@ volumes/
 
 # Ignore libraries
 libs/
+*.sqlite
+*.conf
+*.sqlite
+*.sqlite
+/backend/reverse-proxy/data
+/backend/reverse-proxy
+backend/reverse-proxy/data/database.sqlite
+backend/reverse-proxy/data/database.sqlite
+*.sqlite
+/backend/reverse-proxy/data
+backend/reverse-proxy/data/database.sqlite
