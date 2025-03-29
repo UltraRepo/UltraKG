@@ -86,7 +86,7 @@ This page includes:
 
 ---
 
-## 🔐 Environment Variables (`.env`) *DO NOT UPLOAD TO GITHUB*
+## 🔐 Environment Variables (`.env`) `DO NOT UPLOAD TO GITHUB`
 
 ```dotenv
 # PostgreSQL
