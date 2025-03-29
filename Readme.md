@@ -12,8 +12,6 @@ This symbolic + vector hybrid architecture enables **semantic querying and intel
 
 UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embedding is provided via [Flowise](https://github.com/FlowiseAI/Flowise), and is built on open standards including **OWL2**, **RDF**, **SPARQL**, **PostgreSQL**, and **PGVector**. It runs on **any cloud** or **on-prem infrastructure** using Docker.
 
-UltraKG is built on standards like RDF, OWL2, SPARQL, PostgreSQL, and PGVector, and runs on **any cloud** or **on-prem infrastructure** using Docker.
-
 ---
 
 ## 🚀 Features
