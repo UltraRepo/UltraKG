@@ -302,7 +302,7 @@ FASTAPI_PORT=8000
 
 UltraKG Core is licensed under the [Apache License 2.0](https://www.apache.org/licenses/LICENSE-2.0).
 
-> For access to UltraKG Enterprise (editor UI, AI extensions, WebProtégé integration), contact us for licensing options.
+> For access to UltraRepo Enterprise (Knowledge Graph Editor UI, Enterprise Apps and more), contact us for licensing options.
 
 ---
 
