@@ -47,7 +47,7 @@ For more info on how to configure Nginx for incoming connections:
 ### 1. Prerequisites
 
 - [Docker Desktop](https://www.docker.com/products/docker-desktop/)
-- Python 3.11+
+- Python 3.12+
 - Optional: `brew install make git`
 
 ---
