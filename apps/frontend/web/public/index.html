@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>UltraRepo Admin Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA1MTIgNTEyIj48IS0tIUZvbnQgQXdlc29tZSBGcmVlIDYuNy4yIGJ5IEBmb250YXdlc29tZSAtIGh0dHBzOi8vZm9udGF3ZXNvbWUuY29tIExpY2Vuc2UgLSBodHRwczovL2ZvbnRhd2Vzb21lLmNvbS9saWNlbnNlL2ZyZWUgQ29weXJpZ2h0IDIwMjUgRm9udGljb25zLCBJbmMuLS0+PHBhdGggZD0iTTMyIDMybDQ0OCAwYzE3LjcgMCAzMiAxNC4zIDMyIDMybDAgMzJjMCAxNy43LTE0LjMgMzItMzIgMzJMMzIgMTI4QzE0LjMgMTI4IDAgMTEzLjcgMCA5NkwgNjRDIDAgNDYuMyAxNC4zIDMyIDMyIDMyem0wIDEyOGw0NDggMCAwIDI1NmMwIDM1LjMtMjguNyA2NC02NCA2NEw5NiA0ODBjLTM1LjMgMC02NC0yOC43LTY0LTY0bDAtMjU2em0xMjggODBjMCA4LjggNy4yIDE2IDE2IDE2bDE2MCAwYzguOCAwIDE2LTcuMiAxNi0xNnMtNy4yLTE2LTE2LTE2bC0xNjAgMGMtOC44IDAtMTYgNy4yLTE2IDE2eiIvPjwvc3ZnPg==">
+    <style>
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            padding: 2rem;
+            background-color: #f5f7fa;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 3rem;
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+        }
+        .header svg {
+            width: 48px;
+            height: 48px;
+            margin-right: 1.5rem;
+            fill: #2563eb;
+        }
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 600;
+            margin: 0;
+            color: #1a1a1a;
+        }
+        .container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+        .feature {
+            padding: 1.5rem;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: flex-start;
+        }
+        .feature:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .feature button {
+            min-width: 120px;
+            padding: 0.75rem 1.5rem;
+            font-size: 1rem;
+            cursor: pointer;
+            border: none;
+            background: #2563eb;
+            color: white;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.2s ease;
+            margin-right: 1.5rem;
+        }
+        .feature button:hover {
+            background: #1d4ed8;
+            transform: translateY(-1px);
+        }
+        .feature-content {
+            flex: 1;
+        }
+        .feature-title {
+            font-size: 1.1rem;
+            color: #1a1a1a;
+            margin: 0;
+            font-weight: 500;
+            line-height: 1.4;
+        }
+        .feature-description {
+            font-size: 0.95rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+            <path d="M32 32l448 0c17.7 0 32 14.3 32 32l0 32c0 17.7-14.3 32-32 32L32 128C14.3 128 0 113.7 0 96L0 64C0 46.3 14.3 32 32 32zm0 128l448 0 0 256c0 35.3-28.7 64-64 64L96 480c-35.3 0-64-28.7-64-64l0-256zm128 80c0 8.8 7.2 16 16 16l160 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-160 0c-8.8 0-16 7.2-16 16z"/>
+        </svg>
+        <h1>UltraRepo Admin Dashboard</h1>
+    </div>
+
+    <div class="container">
+        <div class="column">
+            <!-- AI and Data Processing Tools -->
+            <div class="feature">
+                <button onclick="window.open('http://localhost:8081', '_blank')">Chat</button>
+                <div class="feature-content">
+                    <div class="feature-title">AI Chat Interface</div>
+                    <div class="feature-description">Interact with UltraRepo Content via Open WebUI</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <button onclick="window.open('http://localhost:3000', '_blank')">Launch</button>
+                <div class="feature-content">
+                    <div class="feature-title">Flowise Editor</div>
+                    <div class="feature-description">Create and manage document ingestion workflows</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <button onclick="window.open('http://localhost:8500/admin/', '_blank')">Manage</button>
+                <div class="feature-content">
+                    <div class="feature-title">Admin Interface</div>
+                    <div class="feature-description">Manage API keys and system settings</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="column">
+            <!-- System Tools -->
+            <div class="feature">
+                <button onclick="window.open('http://localhost:5050/browser/', '_blank')">Database</button>
+                <div class="feature-content">
+                    <div class="feature-title">pgAdmin Interface</div>
+                    <div class="feature-description">Manage and monitor PostgreSQL database</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <button onclick="window.open('http://localhost:81', '_blank')">Proxy</button>
+                <div class="feature-content">
+                    <div class="feature-title">Nginx Manager</div>
+                    <div class="feature-description">Configure and manage proxy settings</div>
+                </div>
+            </div>
+
+            <div class="feature">
+                <button onclick="window.open('http://localhost:3030', '_blank')">Graph</button>
+                <div class="feature-content">
+                    <div class="feature-title">Jena Fuseki</div>
+                    <div class="feature-description">Query and manage Knowledge Graph data</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

@@ -34,9 +34,12 @@ services:
       dockerfile: docker/Dockerfile.fastapi
     ports:
       - "8000:8000"
+    volumes:
+      - ./apps/services/api:/app
+      - ./apps/frontend:/app/frontend
     environment:
       - FASTAPI_PORT=8000
-    restart: always
+    restart: unless-stopped
 
   api-admin:
     build:
@@ -45,10 +48,10 @@ services:
     ports:
       - "8500:8500"
     environment:
-      - DATABASE_URL=postgresql://postgres:password123@postgres:5432/db
+      - DATABASE_URL=postgresql+asyncpg://postgres:password123@postgres:5432/db
       - ADMIN_SECRET=your-admin-secret-key
     volumes:
-      - ./apps/backend/admin-api:/app
+      - ./apps/services/admin-api:/app
     depends_on:
       - postgres
     restart: unless-stopped
@@ -60,7 +63,7 @@ services:
     environment:
       - ADMIN_PASSWORD=admin
     volumes:
-      - ./backend/jena-fuseki:/fuseki
+      - ./apps/services/jena-fuseki:/fuseki
 
   flowise:
     image: flowiseai/flowise
@@ -71,7 +74,7 @@ services:
       - FLOWISE_USERNAME=admin
       - FLOWISE_PASSWORD=secret
     volumes:
-      - ./backend/flowise:/root/.flowise
+      - ./apps/services/flowise:/root/.flowise
 
   nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
@@ -81,8 +84,8 @@ services:
       - "81:81"
       - "443:443"
     volumes:
-      - ./backend/reverse-proxy/data:/data
-      - ./backend/reverse-proxy/letsencrypt:/etc/letsencrypt
+      - ./apps/services/reverse-proxy/data:/data
+      - ./apps/services/reverse-proxy/letsencrypt:/etc/letsencrypt
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
@@ -94,6 +97,21 @@ services:
       - OLLAMA_API_BASE_URL=http://ollama:11434
     restart: unless-stopped
 
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@admin.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+      PGADMIN_CONFIG_SERVER_MODE: 'False'
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    depends_on:
+      - postgres
+    restart: unless-stopped
+
 volumes:
   pgdata:
   open-webui-data:
+  pgadmin_data:

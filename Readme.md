@@ -140,6 +140,18 @@ Once running, visit the services started by Docker:
 | `nginx`        | 80, 81, 443 |
 | `open-webui`   | 8081      |
 
+| Service        | Port(s)   |  Description
+|----------------|-----------|
+  `PG Agmin'    |  http://localhost:5050/browser/    | PostGreSQL Admin
+| `postgres`     | 5432      |   
+| `localai`      | 8080      |  http://localhost:8080/browser/  | Private AI LLMs (LocalAI)
+| `fastapi`      | 8000      |  http://localhost:8000  |   UltraRepo Admin Page (app launcher)
+| `api-admin`    | 8500      |  http://localhost:8500/admin/  |  FastAPI web and API services
+| `flowise`      | 3000      |  http://localhost:3000/   |   Flowise Editor 
+| `fuseki`       | 3030      |  http://localhost:3030/    |  Jena Graph Query and KG Server
+| `nginx`        | 80, 81, 443 |   http://localhost:81/   |  Nginx Proxy Manager
+| `open-webui`   | 8081      |   http://localhost:8081     |  Open WebUI Chat
+
 
 ## 🐳 Dockerfile Reference
 
