@@ -68,3 +68,29 @@ backend/reverse-proxy/data/database.sqlite
 *.key
 *key.json
 
+# ignore AI models
+/models
+/models/*
+
+*.bin
+*.gguf
+*.onnx  
+
+# ignore reverse proxy keys
+/reverse-proxy/data/keys.json
+/reverse-proxy/data/keys.json
+
+# ignore reverse proxy data
+/reverse-proxy/data
+/reverse-proxy/data/*
+
+# ignore reverse proxy letsencrypt
+/reverse-proxy/letsencrypt
+/reverse-proxy/letsencrypt/*
+
+# ignore reverse proxy config
+/reverse-proxy/config
+/reverse-proxy/config/* 
+
+
+
