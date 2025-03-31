@@ -1,6 +1,6 @@
-# UltraKG: 🗺️  AI Reasoning & Knowledge Graph Stack
+# UltraKG  🗺️ 
 
-**Ultra Knowledge Graph (UltraKG)** is a modular, cloud-agnostic, open-source Knowledge Graph (KG) system designed specifically for use with enterprise private AI systems for AI Reasoning (AIR).
+**Ultra Knowledge Graph (UltraKG)** is a modular, cloud-agnostic, open-source Knowledge Graph (KG) system designed specifically for use with enterprise private AI systems.
 
 Unlike most AI platforms that rely heavily on probabilistic and intelligent 'guessing' at your intent (and often suffer from hallucination, inaccuracy and inconsistent responses), UltraKG is designed to provide AI systems with a map to your actual data for higher accuracy.  This fact based AI approach leverages **curated classification schemas** — known as **Knowledge Graphs** — to create a structured, machine-readable map that enables AI systems to reason with higher accuracy, consistency, and reliability.
 
@@ -11,8 +11,8 @@ UltraKG enhances reasoning capabilities further with **Neurosymbolic Reasoning (
 This symbolic + vector hybrid architecture enables **semantic querying and intelligent retrieval** ideally suited for enterprise-grade use cases — such as regulatory intelligence, clinical research, knowledge management, and more — where accuracy, consistency, and reliability are paramount.
 
 UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embedding is provided via [Flowise](https://github.com/FlowiseAI/Flowise), and is built on open standards including **OWL2**, **RDF**, **SPARQL**, **PostgreSQL**, and **PGVector**. It runs on **any cloud** or **on-prem infrastructure** using Docker.
----
 
+---
 
 ## 🚀 Features
 
@@ -25,33 +25,6 @@ UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embed
 - ☁️ **Cloud-agnostic Docker deployment** (Azure, AWS, GCP, on-prem)
 
 ---
-
-## 📁 Project Structure
-
-```
-UltraKG/
-├── apps/
-│   ├── backend-api/        # FastAPI + index.html + /public site
-│   ├── backend-kg/         # Jena Fuseki RDF triplestore
-│   ├── flowise-agent/      # Flowise config agent
-│   ├── desktop-app/        # Electron frontend app (optional)
-│   └── api-admin/          # FastAPI Admin for API key management
-│
-├── packages/
-│   ├── shared-ui/          # Shared UI components
-│   ├── design-tokens/      # Theme, spacing, color variables
-│   ├── types/              # Shared type declarations
-│   └── utils/              # Shared Python/JS utils
-│
-├── docker/                 # Dockerfiles (FastAPI, Admin)
-├── infra/                  # NGINX Proxy, TLS
-├── models/                 # Vector cache for LocalAI
-├── docker-compose.yml      # Full-stack runner
-├── .env.example            # Environment template
-├── LICENSE
-└── README.md
-```
-
 
 ## 🌐 Network Architecture
 
@@ -114,38 +87,19 @@ cd ../../
 docker-compose up --build
 ```
 
-Once running, visit the services started by Docker:
-
-- [Admin Landing and Launcher Page](http://localhost:8000) - See image below
-- [FastAPI Admin (API Key UI)](http://localhost:8500/admin) - API Key Mgmt
-- [Flowise Dashboard](http://localhost:3000) - Workflows, embedding and more for AI flows
-- [LocalAI API](http://localhost:8080) - Local AI instance with private and cloud LLMs (OpenAI API interface)
-- [Open WebUI (Chat)](http://localhost:8081) - Popular Private AI chat agent with API.  Works with LocalAI
-- [Jena Fuseki (SPARQL)](http://localhost:3030)  - Open source KG / AI Reasoning Query engine
-- [PostgreSQL (PGVector)](localhost:5432) — used for vector and relational data storage
-- [NGINX Proxy Manager](http://localhost:81) - Nginx hosts manage traffic for the services-Setup is below
-
----
-
-## 🧱 Docker Services Overview
-
-| Service        | Port(s)   |
-|----------------|-----------|
-| `postgres`     | 5432      |
-| `localai`      | 8080      |
-| `fastapi`      | 8000      |
-| `api-admin`    | 8500      |
-| `flowise`      | 3000      |
-| `fuseki`       | 3030      |
-| `nginx`        | 80, 81, 443 |
-| `open-webui`   | 8081      |
-
+This will start:
+- PostgreSQL + PGVector
+- Apache Jena + Fuseki
+- Flowise (LangChain UI)
+- Open WebUI (LLM chat)
+- FastAPI server
+- NGINX Proxy Manager
 
 ---
 
 ## 🔐 Default Login for NGINX Proxy Manager
 
-Once the stack is running on docker, go to:
+Once the stack is running, go to:
 
 ```
 http://localhost:81
@@ -169,6 +123,8 @@ Use NGINX Proxy Manager to assign subdomains like:
 - `sparql.yourdomain.com` → Apache Jena Fuseki
 
 > 🔁 Replace `yourdomain.com` with your DNS domain.
+
+---
 
 ---
 # 🌐 UltraKG - NGINX Proxy Manager Setup Guide
@@ -293,25 +249,10 @@ After logging in to your custom domain (e.g. `ai.yourdomain.com`), you will see:
 UltraKG Admin Dashboard - via NPM Login:
 ![FastAPI Dash](ultrakg-dash.png "FastAPI")
 
----
-
-## UltraKG API Setup with FastAPI and FastAPI Admin
-
-This system provides an API which is flows through the Nginx proxy.
-
-There is a basic API authentication and API key management provided in FastAPI Admin.  
-There is also a basic web UI for admins to access and manage the key model:
-
-1. Visit `http://localhost:8500/admin`
-2. The API Key model is located at:
-   - `apps/api-admin/api-models/apikey.py`
-3. Add login, authentication or database config via:
-   - `apps/api-admin/main.py`
-4. Use `frontend/manage-api-keys.html` as a placeholder UI to manage keys via REST.
 
 ---
 
-## 🧪 Sample Use Case for UltraKG AI Reasoning Server
+## 🧪 Sample Use Case
 
 1. Ingest documents via Flowise into PostgreSQL + PGVector
 2. Convert XLS files into OWL2 using the CLI tool
@@ -372,28 +313,3 @@ UltraKG Core is licensed under the [Apache License 2.0](https://www.apache.org/l
 - [FlowiseAI](https://github.com/FlowiseAI/Flowise)
 - [Open WebUI](https://github.com/open-webui/open-webui)
 - [ProtegeProject mapping-master](https://github.com/protegeproject/mapping-master)
-
-
-
----
-
-## ✅ Next Features
-
-- Keycloak Identity & Token Auth
-- XLS Import to OWL2 via Web UI
-- AI Reasoning Logic Designer (GraphRAG + Rules)
-
-
-
----
-
-## 🐳 Dockerfile Reference
-
-| Dockerfile Path | Purpose |
-|------------------|---------|
-| `docker/Dockerfile.fastapi` | FastAPI backend with landing page |
-| `docker/Dockerfile.api-admin` | FastAPI Admin UI for API Key Management |
-| `apps/backend-api/Dockerfile.fastapi` | ❌ Removed (duplicate) |
-| `apps/backend-api/backend/jena-fuseki/Dockerfile` | Optional custom image for Jena Fuseki |
-
-Only the Dockerfiles in the `/docker` directory are used in the unified compose setup.

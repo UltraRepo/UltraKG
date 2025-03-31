@@ -1,0 +1,70 @@
+# Ignore Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Ignore environment files
+.env
+.env.*
+
+# Ignore virtual environments
+venv/
+env/
+.venv/
+
+# Ignore system files
+.DS_Store
+Thumbs.db
+
+# Ignore logs
+*.log
+
+# Ignore compiled code
+*.class
+*.o
+*.out
+
+# Ignore IDE settings
+.vscode/
+.idea/
+
+# Ignore node_modules if used in frontend
+node_modules/
+
+# Ignore build artifacts
+dist/
+build/
+
+# Ignore Docker volumes
+volumes/
+*.pid
+
+# Ignore temporary files
+*.swp
+*.tmp
+*.bak
+*.orig
+
+# Ignore libraries
+libs/
+*.sqlite
+*.conf
+*.sqlite
+*.sqlite
+/backend/reverse-proxy/data
+/backend/reverse-proxy
+backend/reverse-proxy/data/database.sqlite
+backend/reverse-proxy/data/database.sqlite
+*.sqlite
+/backend/reverse-proxy/data
+backend/reverse-proxy/data/database.sqlite
+
+*.keys
+*.pem
+*.crt
+*.csr
+*.key
+*.csr
+*.key
+*key.json
+

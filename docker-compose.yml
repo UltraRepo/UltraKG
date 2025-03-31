@@ -1,4 +1,5 @@
 version: "3.8"
+
 services:
   postgres:
     image: ankane/pgvector
@@ -12,51 +13,74 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
 
+  localai:
+    image: localai/localai:latest-aio-cpu
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./models:/build/models
+    environment:
+      - DEBUG=true
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8080/readyz"]
+      interval: 1m
+      timeout: 20m
+      retries: 5
+    restart: unless-stopped
+
   fastapi:
     build:
       context: .
-      dockerfile: Dockerfile.fastapi
+      dockerfile: docker/Dockerfile.fastapi
     ports:
       - "8000:8000"
     environment:
       - FASTAPI_PORT=8000
     restart: always
 
-  jena-fuseki:
-    image: stain/jena-fuseki
+  api-admin:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile.api-admin
     ports:
-      - "3030:3030"
+      - "8500:8500"
+    restart: unless-stopped
 
   flowise:
     image: flowiseai/flowise
-    restart: always
     ports:
       - "3000:3000"
     environment:
-      - FLOWISE_USERNAME=admin
-      - FLOWISE_PASSWORD=secret
+      - PORT=3000
+    volumes:
+      - ./apps/backend-api/backend/flowise:/root/.flowise
 
-  nginx-proxy-manager:
+  fuseki:
+    image: stain/jena-fuseki
+    ports:
+      - "3030:3030"
+    environment:
+      - ADMIN_PASSWORD=admin
+    volumes:
+      - ./apps/backend-api/backend/jena-fuseki:/fuseki
+
+  nginx:
     image: jc21/nginx-proxy-manager:latest
-    restart: always
     ports:
       - "80:80"
       - "81:81"
       - "443:443"
     volumes:
-      - ./backend/reverse-proxy/data:/data
-      - ./backend/reverse-proxy/letsencrypt:/etc/letsencrypt
+      - ./infra/nginx/data:/data
+      - ./infra/nginx/letsencrypt:/etc/letsencrypt
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     ports:
       - "8081:8080"
     volumes:
-      - open-webui-data:/app/backend/data
-    environment:
-      - OLLAMA_API_BASE_URL=http://ollama:11434
+      - ./apps/backend-api/backend/open-webui:/app/backend/data
     restart: unless-stopped
 
 volumes:
   pgdata:
-  open-webui-data:

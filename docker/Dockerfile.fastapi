@@ -2,9 +2,11 @@ FROM python:3.12-slim
 
 WORKDIR /app
 
-COPY frontend/app /app
-COPY frontend/public /app/frontend/public
-COPY requirements.txt .
+# Copy FastAPI app and public assets from the new structure
+COPY apps/backend-api /app
+
+# Copy requirements file (assuming it's located in backend-api for FastAPI)
+COPY apps/backend-api/requirements.txt .
 
 RUN pip install --no-cache-dir --upgrade pip \
     && pip install --no-cache-dir -r requirements.txt
