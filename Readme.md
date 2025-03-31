@@ -20,36 +20,66 @@ UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embed
 - 🐘 **PostgreSQL + PGVector** for vector search and hybrid AI queries
 - 🔄 **LangChain (via Flowise)** for document ingestion + RAG agents
 - 💬 **Open WebUI** for local/private AI chatbot interface
-- 📄 **XLS to OWL2 Conversion** using ProtegeProject’s `mapping-master`
+- 📄 **XLS to OWL2 Conversion** using ProtegeProject's `mapping-master`
 - 🌐 **FastAPI Landing Page** with admin interface via Nginx Proxy Manager
 - ☁️ **Cloud-agnostic Docker deployment** (Azure, AWS, GCP, on-prem)
 
 ---
 
-## 📁 Project Structure
+## 📁 Project Structure (monorepo)
 
 ```
 UltraKG/
 ├── apps/
-│   ├── backend-api/        # FastAPI + index.html + /public site
-│   ├── backend-kg/         # Jena Fuseki RDF triplestore
-│   ├── flowise-agent/      # Flowise config agent
-│   ├── desktop-app/        # Electron frontend app (optional)
-│   └── api-admin/          # FastAPI Admin for API key management
+│   ├── frontend/                 # Frontend application
+│   │   ├── web/                  # Web application
+│   │   │   ├── public/           # Public assets
+│   │   │   │   ├── assets/       # Static assets
+│   │   │   │   │   ├── box-archive-solid.svg
+│   │   │   │   │   └── graph-search.svg
+│   │   │   │   └── index.html    # Main HTML file
+│   │   │   └── src/              # Source code
+│   │   ├── desktop-app/          # Desktop application (placeholder)
+│   │   │   └── .gitkeep
+│   │   └── flowise-agent/        # Flowise agent (placeholder)
+│   │       └── .gitkeep
+│   └── services/                # Backend services
+│       ├── api/                 # Main FastAPI service
+│       │   ├── api_models/      # API models 
+│       │   │   └── apikey.py
+│       │   └── main.py
+│       ├── admin-api/           # FastAPI Admin service
+│       │   ├── api_models/      # Admin models
+│       │   │   └── apikey.py
+│       │   ├── main.py
+│       │   └── requirements.txt
+│       ├── jena-fuseki/         # Apache Jena Fuseki SPARQL service
+│       ├── flowise/             # Flowise service
+│       ├── kg-fuseki/           # Knowledge Graph XLS-OWL service
+│       └── reverse-proxy/       # NGINX reverse proxy
 │
-├── packages/
-│   ├── shared-ui/          # Shared UI components
-│   ├── design-tokens/      # Theme, spacing, color variables
-│   ├── types/              # Shared type declarations
-│   └── utils/              # Shared Python/JS utils
+├── packages/                    # Shared packages
+│   ├── shared-ui/               # UI components
+│   ├── design-tokens/           # Design system
+│   ├── types/                   # Type definitions
+│   └── utils/                   # Utilities
 │
-├── docker/                 # Dockerfiles (FastAPI, Admin)
-├── infra/                  # NGINX Proxy, TLS
-├── models/                 # Vector cache for LocalAI
-├── docker-compose.yml      # Full-stack runner
-├── .env.example            # Environment template
-├── LICENSE
-└── README.md
+├── docker/                      # Docker configuration
+│   ├── Dockerfile.api-admin     # Admin API Dockerfile
+│   └── Dockerfile.fastapi       # Main API Dockerfile
+│
+├── infra/                       # Infrastructure
+│   └── nginx/                   # NGINX configuration
+│
+├── models/                      # AI model cache
+├── scripts/                     # Utility scripts
+├── doc/                         # Documentation
+├── docker-compose.yml           # Service configuration
+├── requirements.txt             # Python dependencies
+├── .env.example                 # Environment template
+├── .gitignore                   # Git ignore rules
+├── LICENSE                      # Project license
+└── README.md                    # Project documentation
 ```
 
 
@@ -131,26 +161,16 @@ Once running, visit the services started by Docker:
 
 | Service        | Port(s)   |
 |----------------|-----------|
-| `postgres`     | 5432      |
-| `localai`      | 8080      |
-| `fastapi`      | 8000      |
-| `api-admin`    | 8500      |
-| `flowise`      | 3000      |
-| `fuseki`       | 3030      |
-| `nginx`        | 80, 81, 443 |
-| `open-webui`   | 8081      |
+| `pgadmin`      | 5050      | PostGreSQL Admin
+| `postgres`     | 5432      | PostGreSQL db  and PGvector db
+| `localai`      | 8080      | Private AI LLMs (LocalAI)
+| `fastapi`      | 8000      | UltraRepo Admin Page (app launcher)
+| `api-admin`    | 8500      | FastAPI web and API services - key gen
+| `flowise`      | 3000      | Flowise Editor for AI embedding, chat, etc
+| `fuseki`       | 3030      | Apache Jena Knowledge Graph (KG) and Query Server
+| `nginx`        | 80, 81, 443 |  Nginx Proxy Manager (admin user login to UltraRepo)
+| `open-webui`   | 8081      |  Open WebUI Private AI Chat app
 
-| Service        | Port(s)   |  Description
-|----------------|-----------|
-  `PG Agmin'    |  http://localhost:5050/browser/    | PostGreSQL Admin
-| `postgres`     | 5432      |   
-| `localai`      | 8080      |  http://localhost:8080/browser/  | Private AI LLMs (LocalAI)
-| `fastapi`      | 8000      |  http://localhost:8000  |   UltraRepo Admin Page (app launcher)
-| `api-admin`    | 8500      |  http://localhost:8500/admin/  |  FastAPI web and API services
-| `flowise`      | 3000      |  http://localhost:3000/   |   Flowise Editor 
-| `fuseki`       | 3030      |  http://localhost:3030/    |  Jena Graph Query and KG Server
-| `nginx`        | 80, 81, 443 |   http://localhost:81/   |  Nginx Proxy Manager
-| `open-webui`   | 8081      |   http://localhost:8081     |  Open WebUI Chat
 
 
 ## 🐳 Dockerfile Reference
@@ -228,7 +248,7 @@ This guide walks you through configuring NGINX Proxy Manager (NPM) to route and 
 
 | Setting | Action |
 |---------|--------|
-| **SSL Certificate** | Select **“Request a new SSL Certificate”** |
+| **SSL Certificate** | Select **"Request a new SSL Certificate"** |
 | **Force SSL** | ✅ Enabled |
 | **HTTP/2 Support** | ✅ Enabled |
 
@@ -240,7 +260,7 @@ Once complete, traffic to `https://ai.ultrakg.com` will be routed to your intern
 
 ## 🔐 NGINX Basic Auth for Landing Page
 
-To restrict access to the public `index.html` landing page (served via FastAPI), use **NGINX Proxy Manager’s Access List** feature for simple HTTP Basic Auth.
+To restrict access to the public `index.html` landing page (served via FastAPI), use **NGINX Proxy Manager's Access List** feature for simple HTTP Basic Auth.
 
 🧩 This prevents unauthorized users from even seeing the page — ideal for dev, staging, or internal admin portals.
 
@@ -258,7 +278,7 @@ To restrict access to the public `index.html` landing page (served via FastAPI),
    - ✅ Check **"Satisfy Any"**
    - ✅ Add a user:
      - **Username**: `testuser`
-     - **Password**: `testpass` (you’ll enter this in plaintext; it will be hashed automatically)
+     - **Password**: `testpass` (you'll enter this in plaintext; it will be hashed automatically)
 4. Click **Save**
 
 ---
@@ -281,7 +301,7 @@ Now, when a user visits `https://ai.ultrakg.com`, they will first be prompted wi
 - **Username**: `testuser`  
 - **Password**: `testpass`
 
-If the credentials are correct, they’ll be granted access to the `index.html` landing page served by your FastAPI backend.
+If the credentials are correct, they'll be granted access to the `index.html` landing page served by your FastAPI backend.
 
 > This approach ensures simple, centralized authentication without needing to modify your FastAPI app logic.   
 
@@ -408,24 +428,3 @@ UltraKG Core is licensed under the [Apache License 2.0](https://www.apache.org/l
 
 ---
 
-
-
-
-## 🧱 Updated Project Structure (Monorepo)
-
-```
-apps/
-├── backend/
-│   ├── api/            # FastAPI backend API
-│   ├── admin-api/      # API key manager (FastAPI Admin)
-│   └── kg-fuseki/      # Apache Jena SPARQL service
-│
-├── frontend/
-│   ├── desktop-app/    # Electron desktop app
-│   └── flowise-agent/  # Flowise agent builder UI
-
-packages/               # Shared UI components, types, utils
-docker/                 # App-specific Dockerfiles
-infra/                  # NGINX, proxy config
-models/                 # Vector AI model cache
-```
