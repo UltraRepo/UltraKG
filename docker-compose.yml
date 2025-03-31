@@ -44,43 +44,56 @@ services:
       dockerfile: docker/Dockerfile.api-admin
     ports:
       - "8500:8500"
+    environment:
+      - DATABASE_URL=postgresql://postgres:password123@postgres:5432/db
+      - ADMIN_SECRET=your-admin-secret-key
+    volumes:
+      - ./apps/backend/admin-api:/app
+    depends_on:
+      - postgres
     restart: unless-stopped
 
-  flowise:
-    image: flowiseai/flowise
-    ports:
-      - "3000:3000"
-    environment:
-      - PORT=3000
-    volumes:
-      - ./apps/backend/api/backend/flowise:/root/.flowise
-
-  fuseki:
+  jena-fuseki:
     image: stain/jena-fuseki
     ports:
       - "3030:3030"
     environment:
       - ADMIN_PASSWORD=admin
     volumes:
-      - ./apps/backend/api/backend/jena-fuseki:/fuseki
+      - ./backend/jena-fuseki:/fuseki
 
-  nginx:
+  flowise:
+    image: flowiseai/flowise
+    restart: always
+    ports:
+      - "3000:3000"
+    environment:
+      - FLOWISE_USERNAME=admin
+      - FLOWISE_PASSWORD=secret
+    volumes:
+      - ./backend/flowise:/root/.flowise
+
+  nginx-proxy-manager:
     image: jc21/nginx-proxy-manager:latest
+    restart: always
     ports:
       - "80:80"
       - "81:81"
       - "443:443"
     volumes:
-      - ./infra/nginx/data:/data
-      - ./infra/nginx/letsencrypt:/etc/letsencrypt
+      - ./backend/reverse-proxy/data:/data
+      - ./backend/reverse-proxy/letsencrypt:/etc/letsencrypt
 
   open-webui:
     image: ghcr.io/open-webui/open-webui:main
     ports:
       - "8081:8080"
     volumes:
-      - ./apps/backend/api/backend/open-webui:/app/backend/data
+      - open-webui-data:/app/backend/data
+    environment:
+      - OLLAMA_API_BASE_URL=http://ollama:11434
     restart: unless-stopped
 
 volumes:
   pgdata:
+  open-webui-data:
