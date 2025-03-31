@@ -17,11 +17,13 @@ UltraKG includes **GraphRAG and OmniRAG** pipelines. Content ingestion and embed
 ## 🚀 Features
 
 - 🧠 **Apache Jena + Fuseki** SPARQL server for OWL2/RDF querying
+- 🎯 **Private AI LLMs with LocalAI and OpenAI API compatability**
 - 🐘 **PostgreSQL + PGVector** for vector search and hybrid AI queries
-- 🔄 **LangChain (via Flowise)** for document ingestion + RAG agents
+- 🐘 **PgAdmin Web Admin app** to manage PG db 
+- 🔄 **LangChain (via Flowise)** for document ingestion + AI agents
 - 💬 **Open WebUI** for local/private AI chatbot interface
 - 📄 **XLS to OWL2 Conversion** using ProtegeProject's `mapping-master`
-- 🌐 **FastAPI Landing Page** with admin interface via Nginx Proxy Manager
+- 🌐 **FastAPI Admin and API manager Page** with admin interface via Nginx Proxy Manager
 - ☁️ **Cloud-agnostic Docker deployment** (Azure, AWS, GCP, on-prem)
 
 ---
@@ -258,7 +260,7 @@ Once complete, traffic to `https://ai.ultrakg.com` will be routed to your intern
 
 ---
 
-## 🔐 NGINX Basic Auth for Landing Page
+## 🔐 NGINX Basic Auth for UltraRepo App Launcher Page
 
 To restrict access to the public `index.html` landing page (served via FastAPI), use **NGINX Proxy Manager's Access List** feature for simple HTTP Basic Auth.
 
@@ -319,20 +321,22 @@ To verify:
 ---
 
 
-## 🧭 Landing Page (index.html)
+## 🧭 App Launcher Landing Page (index.html)
 
 After logging in to your custom domain (e.g. `ai.yourdomain.com`), you will see:
 
+- 💬 **Chat with UltraRepo Docs (via Open WebUI)**
+- 💬 **Access Private AI LLMs (via Local AI)**
 - 🔗 **Launch Flowise Editor**
 - 📤 **Upload XLS File for KG**
 - 📥 **Download RDF/OWL Graph from Fuseki**
 - 🐘 **Open PostgreSQL Studio (if configured)**
 - 🔐 **Access NGINX Manager**
-- 💬 **Chat with UltraKG (via Open WebUI)**
+
 - 🧬 **View GitHub Repo**
 
 UltraKG Admin Dashboard - via NPM Login:
-![FastAPI Dash](ultrakg-dash.png "FastAPI")
+![FastAPI Dash](ultrakg-dash.jpeg "UltraRepo Dash")
 
 ---
 
