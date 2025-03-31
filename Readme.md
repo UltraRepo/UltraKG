@@ -141,8 +141,17 @@ Once running, visit the services started by Docker:
 | `open-webui`   | 8081      |
 
 
----
+## 🐳 Dockerfile Reference
 
+| Dockerfile Path | Purpose |
+|------------------|---------|
+| `docker/Dockerfile.fastapi` | FastAPI backend with landing page |
+| `docker/Dockerfile.api-admin` | FastAPI Admin UI for API Key Management |
+| `apps/backend/api/backend/jena-fuseki/Dockerfile` | Optional custom image for Apache Jena Fuseki |
+
+This is a monorepo. Only the Dockerfiles in the `/docker` directory are used at this time.
+
+---
 ## 🔐 Default Login for NGINX Proxy Manager
 
 Once the stack is running on docker, go to:
@@ -304,9 +313,9 @@ There is also a basic web UI for admins to access and manage the key model:
 
 1. Visit `http://localhost:8500/admin`
 2. The API Key model is located at:
-   - `apps/api-admin/api-models/apikey.py`
+   - `apps/backend/admin-api/api-models/apikey.py`
 3. Add login, authentication or database config via:
-   - `apps/api-admin/main.py`
+   - `apps/backend/admin-api/main.py`
 4. Use `frontend/manage-api-keys.html` as a placeholder UI to manage keys via REST.
 
 ---
@@ -387,13 +396,24 @@ UltraKG Core is licensed under the [Apache License 2.0](https://www.apache.org/l
 
 ---
 
-## 🐳 Dockerfile Reference
 
-| Dockerfile Path | Purpose |
-|------------------|---------|
-| `docker/Dockerfile.fastapi` | FastAPI backend with landing page |
-| `docker/Dockerfile.api-admin` | FastAPI Admin UI for API Key Management |
-| `apps/backend-api/Dockerfile.fastapi` | ❌ Removed (duplicate) |
-| `apps/backend-api/backend/jena-fuseki/Dockerfile` | Optional custom image for Jena Fuseki |
 
-Only the Dockerfiles in the `/docker` directory are used in the unified compose setup.
+
+## 🧱 Updated Project Structure (Monorepo)
+
+```
+apps/
+├── backend/
+│   ├── api/            # FastAPI backend API
+│   ├── admin-api/      # API key manager (FastAPI Admin)
+│   └── kg-fuseki/      # Apache Jena SPARQL service
+│
+├── frontend/
+│   ├── desktop-app/    # Electron desktop app
+│   └── flowise-agent/  # Flowise agent builder UI
+
+packages/               # Shared UI components, types, utils
+docker/                 # App-specific Dockerfiles
+infra/                  # NGINX, proxy config
+models/                 # Vector AI model cache
+```

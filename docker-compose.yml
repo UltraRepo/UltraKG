@@ -53,7 +53,7 @@ services:
     environment:
       - PORT=3000
     volumes:
-      - ./apps/backend-api/backend/flowise:/root/.flowise
+      - ./apps/backend/api/backend/flowise:/root/.flowise
 
   fuseki:
     image: stain/jena-fuseki
@@ -62,7 +62,7 @@ services:
     environment:
       - ADMIN_PASSWORD=admin
     volumes:
-      - ./apps/backend-api/backend/jena-fuseki:/fuseki
+      - ./apps/backend/api/backend/jena-fuseki:/fuseki
 
   nginx:
     image: jc21/nginx-proxy-manager:latest
@@ -79,7 +79,7 @@ services:
     ports:
       - "8081:8080"
     volumes:
-      - ./apps/backend-api/backend/open-webui:/app/backend/data
+      - ./apps/backend/api/backend/open-webui:/app/backend/data
     restart: unless-stopped
 
 volumes:
